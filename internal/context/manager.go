@@ -66,6 +66,11 @@ func (m *Manager) LoadContexts() error {
 
 	for _, entry := range entries {
 		if entry.IsDir() {
+			// Skip .git directory
+			if entry.Name() == ".git" {
+				continue
+			}
+			
 			contextPath := filepath.Join(m.cldenvDir, entry.Name())
 			files := m.getContextFiles(contextPath)
 			
